@@ -15,6 +15,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        getCoreDataDBPath()
         return true
     }
 
@@ -75,6 +76,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
             }
         }
+    }
+    
+    // MARK: - Core Data Path
+    
+    func getCoreDataDBPath() {
+        let path = FileManager
+            .default
+            .urls(for: .applicationSupportDirectory, in: .userDomainMask)
+            .last?
+            .absoluteString
+            .replacingOccurrences(of: "file://", with: "")
+            .removingPercentEncoding
+        
+        print("Core Data DB Path :: \(path ?? "Not found")")
     }
 
 }
