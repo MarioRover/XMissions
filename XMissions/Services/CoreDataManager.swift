@@ -19,15 +19,13 @@ class CoreDataManager {
     private func saveDB() {
         do {
             try self.moc.save()
-        } catch let error as NSError {
-            print("🚫 \(error.localizedDescription)")
+        } catch {
+            PrintError(error: error as NSError)
         }
     }
     
-    func createPerson() {
-        let person = Person(context: self.moc)
-        person.name = "Hossein"
-        saveDB()
+    private func PrintError(error: NSError) {
+        print("🚫 \(error.localizedDescription)")
     }
     
     func saveCompanyInfo(companyData: CompanyStruct) {
@@ -39,6 +37,7 @@ class CoreDataManager {
         data.cto_propulsion = companyData.cto_propulsion
         data.employees = Int16(companyData.employees)
         data.founded = Int16(companyData.founded)
+        data.founder = companyData.founder
         data.valuation = companyData.valuation
         data.city = companyData.headquarters.city
         data.state = companyData.headquarters.state
@@ -50,5 +49,20 @@ class CoreDataManager {
         data.website = companyData.links.website
         
         saveDB()
+    }
+    
+    func fetchCompanyInfo(completion: @escaping (Company?) -> ()) {
+        var companies = [Company]()
+        
+        let request: NSFetchRequest<Company> = Company.fetchRequest()
+        
+        do {
+            companies = try self.moc.fetch(request)
+        } catch {
+            PrintError(error: error as NSError)
+            completion(nil)
+        }
+        
+        completion(companies.first)
     }
 }

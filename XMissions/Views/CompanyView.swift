@@ -9,6 +9,16 @@ import SwiftUI
 
 struct CompanyView: View {
     
+    @ObservedObject private var companyVM: CompanyViewModel
+    var company: Company?
+    
+    init() {
+        self.companyVM = CompanyViewModel()
+        if let safeData = self.companyVM.company {
+            company = safeData
+        }
+    }
+    
     private let rows = [
         GridItem(.fixed(70)),
         GridItem(.fixed(70))
@@ -31,10 +41,15 @@ struct CompanyView: View {
                             Text("Space Exploration Technologies Corporation")
                                 .foregroundColor(Color("text"))
                                 .font(.system(size: 16, weight: .medium, design: .rounded))
+                            
+                            if let founded = self.company?.founded , let founder = self.company?.founder {
+                                
+                                Text("Founded in \(String(founded)) by \(founder)")
+                                    .foregroundColor(Color("text"))
+                                    .font(.system(size: 14, weight: .light, design: .rounded))
+                            }
 
-                            Text("Founded in 2002 by Elon Musk")
-                                .foregroundColor(Color("text"))
-                                .font(.system(size: 14, weight: .light, design: .rounded))
+                            
                         }
                         
                         
@@ -61,17 +76,16 @@ struct CompanyView: View {
                             HeaderSection(title: "Managers")
 
                             LazyHGrid(rows: rows) {
-                                UserItem()
-                                UserItem()
-                                UserItem()
-                                UserItem()
+                                ForEach(self.companyVM.managers, id:\.id) { manager in
+                                    UserItem(manager: manager)
+                                }
                             }
                         }
                         
                         VStack {
                             HeaderSection(title: "Summery")
 
-                            Text("SpaceX designs, manufactures and launches advanced rockets and spacecraft. The company was founded in 2002 to revolutionize space technology, with the ultimate goal of enabling people to live on other planets.")
+                            Text(self.company?.summary ?? "")
                                 .foregroundColor(Color("text"))
                                 .font(.system(size: 14, weight: .light, design: .rounded))
                                 .padding([.leading, .trailing], 16)
@@ -113,6 +127,9 @@ struct HeaderSection: View {
 }
 
 struct UserItem: View {
+    
+    let manager: Manager
+    
     var body: some View {
         HStack(spacing: 15) {
             VStack {
@@ -126,11 +143,11 @@ struct UserItem: View {
             
             
             VStack(alignment: .leading, spacing: 10) {
-                Text("CTO")
+                Text(manager.label)
                     .foregroundColor(Color("text"))
                     .font(.system(size: 16, weight: .bold, design: .rounded))
                 
-                Text("Elon Musk")
+                Text(manager.name)
                     .foregroundColor(Color("dark-gray"))
                     .font(.system(size: 16, weight: .medium, design: .rounded))
             }

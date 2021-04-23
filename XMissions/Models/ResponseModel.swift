@@ -20,6 +20,7 @@ struct CompanyStruct: Decodable {
     let cto_propulsion: String
     let employees: Int
     let founded: Int
+    let founder: String
     let headquarters: Headquarters
     let links: Links
     let summary: String

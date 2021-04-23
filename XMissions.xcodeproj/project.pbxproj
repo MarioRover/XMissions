@@ -27,7 +27,7 @@
 		83E5EDEA2632C0290027FFDC /* ContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83E5EDE92632C0290027FFDC /* ContentViewModel.swift */; };
 		83E5EDEF2632C0760027FFDC /* TabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83E5EDEE2632C0760027FFDC /* TabBar.swift */; };
 		83E5EDF22632C1180027FFDC /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83E5EDF12632C1180027FFDC /* CoreDataManager.swift */; };
-		83E5EDF92632E1130027FFDC /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83E5EDF82632E1130027FFDC /* DataModel.swift */; };
+		83E5EDFC2632E9C10027FFDC /* CompanyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83E5EDFB2632E9C10027FFDC /* CompanyViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -52,7 +52,7 @@
 		83E5EDE92632C0290027FFDC /* ContentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewModel.swift; sourceTree = "<group>"; };
 		83E5EDEE2632C0760027FFDC /* TabBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBar.swift; sourceTree = "<group>"; };
 		83E5EDF12632C1180027FFDC /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
-		83E5EDF82632E1130027FFDC /* DataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
+		83E5EDFB2632E9C10027FFDC /* CompanyViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -124,6 +124,7 @@
 			isa = PBXGroup;
 			children = (
 				83E5EDE92632C0290027FFDC /* ContentViewModel.swift */,
+				83E5EDFB2632E9C10027FFDC /* CompanyViewModel.swift */,
 			);
 			path = "View Models";
 			sourceTree = "<group>";
@@ -134,7 +135,6 @@
 				83E5EDAA2632BB3A0027FFDC /* XMissions.xcdatamodeld */,
 				83E5EDDC2632BFB60027FFDC /* ResponseModel.swift */,
 				83E5EDDF2632BFBB0027FFDC /* TabModel.swift */,
-				83E5EDF82632E1130027FFDC /* DataModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -279,7 +279,7 @@
 				83E5EDA72632BB3A0027FFDC /* SceneDelegate.swift in Sources */,
 				83E5EDF22632C1180027FFDC /* CoreDataManager.swift in Sources */,
 				83E5EDE42632C0040027FFDC /* CompanyView.swift in Sources */,
-				83E5EDF92632E1130027FFDC /* DataModel.swift in Sources */,
+				83E5EDFC2632E9C10027FFDC /* CompanyViewModel.swift in Sources */,
 				83E5EDE02632BFBB0027FFDC /* TabModel.swift in Sources */,
 				83E5EDD32632BED30027FFDC /* Queries.graphql in Sources */,
 				83E5EDA92632BB3A0027FFDC /* ContentView.swift in Sources */,

@@ -10,6 +10,7 @@
         <attribute name="employees" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="flickr" optional="YES" attributeType="String"/>
         <attribute name="founded" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="founder" optional="YES" attributeType="String"/>
         <attribute name="state" optional="YES" attributeType="String"/>
         <attribute name="summary" optional="YES" attributeType="String"/>
         <attribute name="twitter" optional="YES" attributeType="String"/>
@@ -21,6 +22,6 @@
     </entity>
     <elements>
         <element name="Person" positionX="-63" positionY="-18" width="128" height="44"/>
-        <element name="Company" positionX="-54" positionY="0" width="128" height="239"/>
+        <element name="Company" positionX="-54" positionY="0" width="128" height="254"/>
     </elements>
 </model>
