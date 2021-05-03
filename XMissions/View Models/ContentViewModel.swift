@@ -21,7 +21,6 @@ class ContentViewModel: ObservableObject {
                 print("❗️There's not company")
                 return
             }
-            
             CoreDataManager.shared.saveCompanyInfo(companyData: company)
         }
     }

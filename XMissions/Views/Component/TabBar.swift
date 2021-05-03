@@ -20,10 +20,10 @@ struct TabBar: View {
                     
                     GeometryReader { geometry in
                         VStack(spacing: 4) {
-                            Image(uiImage: tabItems[index].image)
+                            Image(uiImage: tabItems[index].image ?? defaultImage)
                                 .resizable()
                                 .frame(width: 28, height: 28, alignment: .center)
-                                .foregroundColor(self.model.selectedIndex == index ? Color("background") : Color("light-gray"))
+                                .foregroundColor(self.model.selectedIndex == index ? Color("light-blue") : Color.white)
                                 .rotationEffect(.degrees(
                                     self.model.selectedIndex == index ? -20 : 0
                                 ))
@@ -43,7 +43,7 @@ struct TabBar: View {
             }
             .padding([.top,.bottom], 25)
         }
-        .background(Color.white)
+        .background(Color("mid-blue"))
         .cornerRadius(39)
     }
 }

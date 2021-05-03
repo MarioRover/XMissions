@@ -31,7 +31,7 @@ struct CompanyView: View {
     var body: some View {
         NavigationView {
             ZStack {
-                Color("background").edgesIgnoringSafeArea(.all)
+                Color("navy-blue").edgesIgnoringSafeArea(.all)
                 
                 ScrollView {
                     VStack(spacing: 21) {
@@ -39,13 +39,13 @@ struct CompanyView: View {
                         
                         VStack(alignment: .center, spacing: 10) {
                             Text("Space Exploration Technologies Corporation")
-                                .foregroundColor(Color("text"))
+                                .foregroundColor(Color.white)
                                 .font(.system(size: 16, weight: .medium, design: .rounded))
                             
                             if let founded = self.company?.founded , let founder = self.company?.founder {
                                 
                                 Text("Founded in \(String(founded)) by \(founder)")
-                                    .foregroundColor(Color("text"))
+                                    .foregroundColor(Color.white)
                                     .font(.system(size: 14, weight: .light, design: .rounded))
                             }
 
@@ -72,13 +72,11 @@ struct CompanyView: View {
                         
                         
                         
-                        VStack(spacing: 14) {
+                        VStack(alignment: .leading, spacing: 14) {
                             HeaderSection(title: "Managers")
 
-                            LazyHGrid(rows: rows) {
-                                ForEach(self.companyVM.managers, id:\.id) { manager in
-                                    UserItem(manager: manager)
-                                }
+                            ForEach(self.companyVM.managers, id:\.id) { manager in
+                                UserItem(manager: manager)
                             }
                         }
                         
@@ -86,15 +84,18 @@ struct CompanyView: View {
                             HeaderSection(title: "Summery")
 
                             Text(self.company?.summary ?? "")
-                                .foregroundColor(Color("text"))
+                                .foregroundColor(Color.white)
                                 .font(.system(size: 14, weight: .light, design: .rounded))
                                 .padding([.leading, .trailing], 16)
 
                         }
                         
-                        VStack {
+                        VStack(alignment: .leading, spacing: 14) {
                             HeaderSection(title: "Information")
                             
+                            ForEach(self.companyVM.companyInfo, id:\.label) { info in
+                                InfoItem(info: info)
+                            }
                             
                         }
                     }
@@ -118,7 +119,7 @@ struct HeaderSection: View {
     
     var body: some View {
         Text(self.title)
-            .foregroundColor(Color("text"))
+            .foregroundColor(Color.white)
             .font(.system(size: 16, weight: .semibold, design: .rounded))
             .padding([.bottom], 14)
             .padding(.leading, 16)
@@ -131,26 +132,54 @@ struct UserItem: View {
     let manager: Manager
     
     var body: some View {
-        HStack(spacing: 15) {
-            VStack {
-                Image("user-tie")
-                    .resizable()
-                    .frame(width: 29, height: 33, alignment: .center)
-            }
-            .frame(width: 58, height: 58, alignment: .center)
-            .background(Color.white)
-            .cornerRadius(23)
+        HStack(spacing: 10) {
+            
+            Image("user-tie")
+                .resizable()
+                .frame(width: 30, height: 34, alignment: .center)
+                .foregroundColor(.white)
             
             
-            VStack(alignment: .leading, spacing: 10) {
+            VStack(alignment: .leading) {
                 Text(manager.label)
-                    .foregroundColor(Color("text"))
-                    .font(.system(size: 16, weight: .bold, design: .rounded))
-                
-                Text(manager.name)
-                    .foregroundColor(Color("dark-gray"))
-                    .font(.system(size: 16, weight: .medium, design: .rounded))
+                    .foregroundColor(Color.white)
+                    .font(.system(size: 16, weight: .semibold, design: .rounded))
+
+                if(!manager.definition.isEmpty) {
+                    Text(manager.definition)
+                        .foregroundColor(Color("light-gray"))
+                        .font(.system(size: 14, weight: .light, design: .rounded))
+                }
             }
+            
+            Spacer()
+            
+            Text(manager.name)
+                .foregroundColor(.white)
+                .font(.system(size: 14, weight: .medium, design: .rounded))
+        }.padding([.leading, .trailing], 16)
+    }
+}
+
+struct InfoItem: View {
+    let info: CompanyInfo
+    
+    var body: some View {
+        HStack {
+            Image(uiImage: info.image ?? defaultImage)
+                .resizable()
+                .frame(width: 30, height: 30, alignment: .center)
+                .foregroundColor(.white)
+            
+            Text(info.label)
+                .font(.system(size: 16, weight: .semibold, design: .rounded))
+            
+            Spacer()
+            
+            Text(info.value)
+                .font(.system(size: 14, weight: .medium, design: .rounded))
         }
+        .padding([.leading, .trailing], 16)
+        .foregroundColor(.white)
     }
 }

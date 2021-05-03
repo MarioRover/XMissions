@@ -14,15 +14,16 @@ struct ContentView: View {
         self.contentVM = ContentViewModel()
         
         UINavigationBar.appearance().largeTitleTextAttributes = [
-            .foregroundColor: UIColor(named: "text")!,
-            .font: UIFont.systemFont(ofSize: 24, weight: .bold)
+            .foregroundColor: UIColor(Color.white),
+            .font: UIFont.systemFont(ofSize: 26, weight: .bold)
         ]
-        UINavigationBar.appearance().barTintColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+//        UINavigationBar.appearance().barTintColor = UIColor(Color("mid-blue"))
+//        UINavigationBar.appearance().tintColor = UIColor(Color.white)
     }
     
     var body: some View {
         ZStack {
-            Color("background").edgesIgnoringSafeArea(.all)
+            Color("navy-blue").edgesIgnoringSafeArea(.all)
             
             VStack {
                 Spacer()

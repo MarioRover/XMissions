@@ -20,15 +20,17 @@ class CoreDataManager {
         do {
             try self.moc.save()
         } catch {
-            PrintError(error: error as NSError)
+            PrintError(error as NSError)
         }
     }
     
-    private func PrintError(error: NSError) {
+    private func PrintError(_ error: NSError) {
         print("🚫 \(error.localizedDescription)")
     }
     
     func saveCompanyInfo(companyData: CompanyStruct) {
+        self.cleanEntity(entityName: "Company")
+        
         let data = Company(context: self.moc)
         
         data.ceo = companyData.ceo
@@ -59,10 +61,22 @@ class CoreDataManager {
         do {
             companies = try self.moc.fetch(request)
         } catch {
-            PrintError(error: error as NSError)
+            PrintError(error as NSError)
             completion(nil)
         }
         
         completion(companies.first)
+    }
+    
+    private func cleanEntity(entityName: String) {
+        let fetchRequest: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: entityName)
+            
+        let batchDeleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
+        
+        do {
+            try self.moc.execute(batchDeleteRequest)
+        } catch {
+            PrintError(error as NSError)
+        }
     }
 }
