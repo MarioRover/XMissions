@@ -28,27 +28,31 @@ class CoreDataManager {
         print("🚫 \(error.localizedDescription)")
     }
     
-    func saveCompanyInfo(companyData: CompanyStruct) {
+    func saveInitialData(data: APIResponse) {
         self.cleanEntity(entityName: "Company")
         
-        let data = Company(context: self.moc)
+        let companyEntity = Company(context: self.moc)
         
-        data.ceo = companyData.ceo
-        data.cto = companyData.cto
-        data.coo = companyData.coo
-        data.cto_propulsion = companyData.cto_propulsion
-        data.employees = Int16(companyData.employees)
-        data.founded = Int16(companyData.founded)
-        data.founder = companyData.founder
-        data.valuation = companyData.valuation
-        data.city = companyData.headquarters.city
-        data.state = companyData.headquarters.state
-        data.address = companyData.headquarters.address
-        data.summary = companyData.summary
-        data.flickr = companyData.links.flickr
-        data.twitter = companyData.links.twitter
-        data.twitter = companyData.links.twitter
-        data.website = companyData.links.website
+        if let companyData = data.company {
+            companyEntity.ceo = companyData.ceo
+            companyEntity.cto = companyData.cto
+            companyEntity.coo = companyData.coo
+            companyEntity.cto_propulsion = companyData.cto_propulsion
+            companyEntity.employees = Int16(companyData.employees ?? 0)
+            companyEntity.founded = Int16(companyData.founded ?? 0)
+            companyEntity.founder = companyData.founder
+            companyEntity.valuation = companyData.valuation ?? 0
+            companyEntity.city = companyData.headquarters?.city
+            companyEntity.state = companyData.headquarters?.state
+            companyEntity.address = companyData.headquarters?.address
+            companyEntity.summary = companyData.summary
+            companyEntity.flickr = companyData.links?.flickr
+            companyEntity.twitter = companyData.links?.twitter
+            companyEntity.twitter = companyData.links?.twitter
+            companyEntity.website = companyData.links?.website
+        } else {
+            print("❗️There's not company")
+        }
         
         saveDB()
     }

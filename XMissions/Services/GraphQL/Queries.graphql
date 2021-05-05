@@ -1,4 +1,4 @@
-query CompanyInfo {
+query Initial {
     company {
         ceo
         coo
@@ -20,4 +20,12 @@ query CompanyInfo {
         summary
         valuation
       }
+  launchesPast {
+    id
+    launch_date_utc
+    mission_name
+    links {
+      mission_patch_small
+    }
+  }
 }

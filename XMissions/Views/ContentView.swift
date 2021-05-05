@@ -35,7 +35,7 @@ struct ContentView: View {
                     case 1:
                         Text("Vehicles")
                     case 2:
-                        Text("Missions")
+                        MissionsView(launchesPast: self.contentVM.launchesPast)
                     case 3:
                         Text("News")
                     case 4:

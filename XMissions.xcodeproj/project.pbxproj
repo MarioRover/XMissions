@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		830489B726405816005D28C2 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 830489B626405816005D28C2 /* Models.swift */; };
+		8383BB672642AA310029A2C8 /* MissionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8383BB662642AA310029A2C8 /* MissionsView.swift */; };
 		83CA43D62640254A00332AAA /* Queries.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 83CA43D52640254A00332AAA /* Queries.graphql */; };
 		83E5EDA52632BB3A0027FFDC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83E5EDA42632BB3A0027FFDC /* AppDelegate.swift */; };
 		83E5EDA72632BB3A0027FFDC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83E5EDA62632BB3A0027FFDC /* SceneDelegate.swift */; };
@@ -32,6 +33,7 @@
 
 /* Begin PBXFileReference section */
 		830489B626405816005D28C2 /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
+		8383BB662642AA310029A2C8 /* MissionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MissionsView.swift; sourceTree = "<group>"; };
 		83CA43D52640254A00332AAA /* Queries.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = Queries.graphql; sourceTree = "<group>"; };
 		83E5EDA12632BB3A0027FFDC /* XMissions.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = XMissions.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		83E5EDA42632BB3A0027FFDC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -115,6 +117,7 @@
 				83E5EDB22632BB3B0027FFDC /* LaunchScreen.storyboard */,
 				83E5EDA82632BB3A0027FFDC /* ContentView.swift */,
 				83E5EDE32632C0040027FFDC /* CompanyView.swift */,
+				8383BB662642AA310029A2C8 /* MissionsView.swift */,
 				83E5EDED2632C0650027FFDC /* Component */,
 			);
 			path = Views;
@@ -288,6 +291,7 @@
 				830489B726405816005D28C2 /* Models.swift in Sources */,
 				83E5EDD72632BF790027FFDC /* API.swift in Sources */,
 				83E5EDDA2632BF9A0027FFDC /* APIService.swift in Sources */,
+				8383BB672642AA310029A2C8 /* MissionsView.swift in Sources */,
 				83E5EDC22632BBAC0027FFDC /* NSManagedObjectContext+Extensions.swift in Sources */,
 				83E5EDEF2632C0760027FFDC /* TabBar.swift in Sources */,
 			);

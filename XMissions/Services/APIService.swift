@@ -9,12 +9,12 @@ import Foundation
 
 class APIService {
     
-    static func getCompanyInfo(completion: @escaping (APIResponse?) -> ()) {
-        Network.shared.apollo.fetch(query: CompanyInfoQuery()) { result in
+    static func getInitialData(completion: @escaping (APIResponse?) -> ()) {
+        Network.shared.apollo.fetch(query: InitialQuery()) { result in
             switch result {
             case .success(let graphQLResult):
                 if let companyObject = graphQLResult.data?.jsonObject {
-                    
+
                     guard let jsonData = try? JSONSerialization.data(withJSONObject: companyObject) else {
                         completion(nil)
                         fatalError("Error Seriallize Response")
