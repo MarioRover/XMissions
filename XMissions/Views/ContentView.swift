@@ -39,7 +39,9 @@ struct ContentView: View {
                     case 3:
                         Text("News")
                     case 4:
-                        CompanyView()
+                        if let company = self.contentVM.company {
+                            CompanyView(companyData: company)
+                        }
                     default:
                         Text("Home")
                     }

@@ -10,23 +10,17 @@ import SwiftUI
 struct CompanyView: View {
     
     @ObservedObject private var companyVM: CompanyViewModel
-    var company: Company?
+    @State var company: CompanyModel
+    @State var currentIndex = 0
     
-    init() {
-        self.companyVM = CompanyViewModel()
-        if let safeData = self.companyVM.company {
-            company = safeData
-        }
+    init(companyData: CompanyModel) {
+        self.companyVM = CompanyViewModel(company: companyData)
+        self.company = companyData
     }
     
-    private let rows = [
-        GridItem(.fixed(70)),
-        GridItem(.fixed(70))
-    ]
-    
-    private var numberOfImages = 4
+    private let numberOfImages = 4
     private let timer = Timer.publish(every: 3, on: .main, in: .common).autoconnect()
-    @State var currentIndex = 0
+    
     
     var body: some View {
         NavigationView {
@@ -34,7 +28,7 @@ struct CompanyView: View {
                 Color("navy-blue").edgesIgnoringSafeArea(.all)
                 
                 ScrollView {
-                    VStack(spacing: 21) {
+                    VStack(spacing: 40) {
                         Spacer()
                         
                         VStack(alignment: .center, spacing: 10) {
@@ -42,7 +36,7 @@ struct CompanyView: View {
                                 .foregroundColor(Color.white)
                                 .font(.system(size: 16, weight: .medium, design: .rounded))
                             
-                            if let founded = self.company?.founded , let founder = self.company?.founder {
+                            if let founded = self.company.founded , let founder = self.company.founder {
                                 
                                 Text("Founded in \(String(founded)) by \(founder)")
                                     .foregroundColor(Color.white)
@@ -83,7 +77,7 @@ struct CompanyView: View {
                         VStack {
                             HeaderSection(title: "Summery")
 
-                            Text(self.company?.summary ?? "")
+                            Text(self.company.summary ?? "")
                                 .foregroundColor(Color.white)
                                 .font(.system(size: 14, weight: .light, design: .rounded))
                                 .padding([.leading, .trailing], 16)
@@ -98,6 +92,17 @@ struct CompanyView: View {
                             }
                             
                         }
+                        
+                        VStack {
+                            HeaderSection(title: "Social")
+                            
+                            HStack(alignment: .center, spacing: 20) {
+                                ForEach(self.companyVM.companySocial, id:\.label) { data in
+                                    SocialItem(social: data)
+                                }
+                            }
+                            
+                        }
                     }
                 }
                 .navigationBarTitle("Comapny")
@@ -108,7 +113,7 @@ struct CompanyView: View {
 
 struct CompanyView_Previews: PreviewProvider {
     static var previews: some View {
-        CompanyView()
+        CompanyView(companyData: CompanyModel(ceo: "", coo: "", cto: "", cto_propulsion: "", employees: 0, founded: 0, founder: "", headquarters: Headquarters(address: "", city: "", state: ""), links: Links(website: "", twitter: "", flickr: ""), summary: "", valuation: 0))
             .previewDevice("iPhone 12")
     }
 }
@@ -120,7 +125,7 @@ struct HeaderSection: View {
     var body: some View {
         Text(self.title)
             .foregroundColor(Color.white)
-            .font(.system(size: 16, weight: .semibold, design: .rounded))
+            .font(.system(size: 18, weight: .bold, design: .rounded))
             .padding([.bottom], 14)
             .padding(.leading, 16)
             .frame(maxWidth: .infinity, alignment: .leading)
@@ -181,5 +186,35 @@ struct InfoItem: View {
         }
         .padding([.leading, .trailing], 16)
         .foregroundColor(.white)
+    }
+}
+
+struct SocialItem: View {
+    @Environment(\.openURL) var openURL
+    
+    let social: CompanyInfo
+    
+    var body: some View {
+
+        if let url = URL(string: social.value) {
+            Link(destination: url) {
+                VStack {
+                    ZStack(alignment: .center) {
+                        Image(uiImage: social.image ?? defaultImage)
+                            .resizable()
+                            .frame(width: 25, height: 25, alignment: .center)
+                            .foregroundColor(.black)
+                    }
+                    .frame(width: 50, height: 50, alignment: .center)
+                    .background(Color.white)
+                    .cornerRadius(7)
+                    
+                    Text(social.label)
+                        .font(.system(size: 12, weight: .medium, design: .rounded))
+                        .foregroundColor(.white)
+                }
+            }
+        }
+        
     }
 }

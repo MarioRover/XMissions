@@ -8,29 +8,33 @@
 import SwiftUI
 
 class CompanyViewModel: ObservableObject {
-        
-    @Published var company: Company?
+    
+    @Published var company: CompanyModel
     @Published var managers = [Manager]()
     @Published var companyInfo = [CompanyInfo]()
-
-    init() {
-        getComapnyData()
+    @Published var companySocial = [CompanyInfo]()
+    
+    init(company: CompanyModel) {
+        self.company = company
+        createPageItems()
     }
     
-    private func getComapnyData() {
-        CoreDataManager.shared.fetchCompanyInfo { (data) in
-            if let data = data {
-                self.company = data
-                self.managers.append(Manager(label: "CEO", definition: "Chief executive officer", name: data.ceo ?? ""))
-                self.managers.append(Manager(label: "COO", definition: "Chief operating officer", name: data.coo ?? ""))
-                self.managers.append(Manager(label: "CTO", definition: "Chief technology officer", name: data.cto ?? ""))
-                self.managers.append(Manager(label: "Propulsion", definition: "", name: data.cto_propulsion ?? ""))
-                
-                self.companyInfo.append(CompanyInfo(label: "Valuation", image: UIImage(named: "sack-dollar"), value: currencyFormate(value: data.valuation)))
-                self.companyInfo.append(CompanyInfo(label: "Employees", image: UIImage(named: "user-friends"), value: String(data.employees)))
-                self.companyInfo.append(CompanyInfo(label: "Address", image: UIImage(named: "location"), value: String("\(data.city!), \(data.state!)")))
-            }
-        }
+    private func createPageItems() {
+        
+        self.managers.append(Manager(label: "CEO", definition: "Chief executive officer", name: company.ceo ?? ""))
+        self.managers.append(Manager(label: "COO", definition: "Chief operating officer", name: company.coo ?? ""))
+        self.managers.append(Manager(label: "CTO", definition: "Chief technology officer", name: company.cto ?? ""))
+        self.managers.append(Manager(label: "Propulsion", definition: "", name: company.cto_propulsion ?? ""))
+        
+        self.companyInfo.append(CompanyInfo(label: "Valuation", image: UIImage(named: "sack-dollar"), value: currencyFormate(value: company.valuation ?? 0)))
+        self.companyInfo.append(CompanyInfo(label: "Employees", image: UIImage(named: "user-friends"), value: String(company.employees ?? 0)))
+        self.companyInfo.append(CompanyInfo(label: "Address", image: UIImage(named: "location"), value: String("\(company.headquarters?.city! ?? ""), \(company.headquarters?.state! ?? "")")))
+        
+        self.companySocial.append(CompanyInfo(label: "Website", image: UIImage(named: "globe"), value: company.links?.website ?? ""))
+        self.companySocial.append(CompanyInfo(label: "Flickr", image: UIImage(named: "flickr"), value: company.links?.flickr ?? ""))
+        self.companySocial.append(CompanyInfo(label: "Twitter", image: UIImage(named: "twitter"), value: company.links?.twitter ?? ""))
+        
     }
+
 }
 

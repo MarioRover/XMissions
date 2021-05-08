@@ -10,6 +10,7 @@ import Foundation
 class ContentViewModel: ObservableObject {
     @Published var selectedIndex = 0
     @Published var launchesPast = [LaunchModel]()
+    @Published var company: CompanyModel?
     
     init() {
         getInitialData()
@@ -24,7 +25,10 @@ class ContentViewModel: ObservableObject {
                     self.launchesPast = launchesPastData
                 }
                 
-                CoreDataManager.shared.saveInitialData(data: data)
+                if let companyData = data.company {
+                    self.company = companyData
+                }
+                
             } else {
                 print("❗️There's not response")
             }
