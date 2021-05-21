@@ -29,8 +29,42 @@ struct MissionDetailView: View {
                         ImageSlider()
                         
                         Spacer()
-
-                        Text("Hello").foregroundColor(.white)
+                        
+                        VStack(alignment: .leading) {
+                            HStack {
+                                MissionPath(url: self.missionDetailVM.mission?.links?.mission_patch_small ?? "")
+                                
+                                VStack(alignment: .leading) {
+                                    Text(self.missionDetailVM.mission?.mission_name ?? "Unknown")
+                                        .foregroundColor(.white)
+                                        .font(.system(size: 16, weight: .bold, design: .rounded))
+                                    
+                                    if let launchDate = self.missionDetailVM.mission?.launch_date_utc {
+                                        HStack {
+                                            Image(systemName: "calendar.badge.clock")
+                                                .resizable()
+                                                .frame(width: 15, height: 15, alignment: .center)
+                                                .foregroundColor(Color("light-gray"))
+                                            
+                                            Text(Date.dateFormatter(time: launchDate))
+                                                .foregroundColor(Color("light-gray"))
+                                                .font(.system(size: 14, weight: .medium, design: .rounded))
+                                        }
+                                    }
+                                }.padding(.leading, 10)
+                                
+                                Spacer()
+                            }
+                            .padding([.top, .bottom], 15)
+                            .padding([.leading, .trailing], 20)
+                            
+                            
+                        }
+                        .frame(maxWidth: .infinity)
+                        .background(Color("mid-blue"))
+                        .cornerRadius(5)
+                        .padding(.all, 15)
+                        
 
                         Spacer()
                     }
@@ -38,6 +72,9 @@ struct MissionDetailView: View {
                     
                 .navigationBarTitle(mission.mission_name ?? "Unkonwn")
                 .navigationBarTitleDisplayMode(.inline)
+                
+            }.onAppear {
+                self.missionDetailVM.getMissionDetail()
             }
         
 
@@ -63,5 +100,44 @@ struct ImageSlider: View {
         }
         .tabViewStyle(PageTabViewStyle(indexDisplayMode: .always))
         .frame(width: UIScreen.main.bounds.width, height: 260)
+    }
+}
+
+struct MissionPath: View {
+    
+    @ObservedObject var imageLoader: ImageLoaderViewModel
+    
+    private let frameSize = CGFloat(50)
+    
+    init(url: String) {
+        self.imageLoader = ImageLoaderViewModel()
+        if !url.isEmpty {
+            self.imageLoader.downloadImage(url: url)
+        }
+    }
+    
+    
+    
+    var body: some View {
+        
+        HStack {
+            if let image = self.imageLoader.downloadedImage {
+                Image(uiImage: UIImage(data: image)!)
+                    .resizable()
+                    .frame(width: frameSize, height: frameSize, alignment: .center)
+                    .foregroundColor(.black)
+            } else {
+                VStack(alignment: .center) {
+                    Image("rocket")
+                        .resizable()
+                        .frame(width: 35, height: 35, alignment: .center)
+                        .foregroundColor(Color("dark-gray"))
+                }
+                .frame(width: frameSize, height: frameSize, alignment: .center)
+                .background(Color("light-gray"))
+                .cornerRadius(50)
+            }
+        }
+        
     }
 }
