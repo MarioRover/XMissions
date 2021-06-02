@@ -26,7 +26,7 @@ class CompanyViewModel: ObservableObject {
         self.managers.append(Manager(label: "CTO", definition: "Chief technology officer", name: company.cto ?? ""))
         self.managers.append(Manager(label: "Propulsion", definition: "", name: company.cto_propulsion ?? ""))
         
-        self.companyInfo.append(CompanyInfo(label: "Valuation", image: UIImage(named: "sack-dollar"), value: currencyFormate(value: company.valuation ?? 0)))
+        self.companyInfo.append(CompanyInfo(label: "Valuation", image: UIImage(named: "sack-dollar"), value: Tool.currencyFormate(value: company.valuation ?? 0)))
         self.companyInfo.append(CompanyInfo(label: "Employees", image: UIImage(named: "user-friends"), value: String(company.employees ?? 0)))
         self.companyInfo.append(CompanyInfo(label: "Address", image: UIImage(named: "location"), value: String("\(company.headquarters?.city! ?? ""), \(company.headquarters?.state! ?? "")")))
         

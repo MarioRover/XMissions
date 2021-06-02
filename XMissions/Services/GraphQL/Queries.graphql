@@ -55,6 +55,7 @@ query MissionDetail($id:ID!) {
     }
     rocket {
       rocket_name
+      rocket_type
     }
   }
 

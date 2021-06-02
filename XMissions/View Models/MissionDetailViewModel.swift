@@ -10,7 +10,7 @@ import Combine
 class MissionDetailViewModel: ObservableObject {
     
     let id: String
-    @Published var mission: LaunchModel?
+    @Published var mission: LaunchModel_2?
     @Published var loading = false
     
     init(id: String) {

@@ -20,7 +20,7 @@ struct TabBar: View {
                     
                     GeometryReader { geometry in
                         VStack(spacing: 4) {
-                            Image(uiImage: tabItems[index].image ?? defaultImage)
+                            Image(uiImage: tabItems[index].image ?? Tool.defaultImage)
                                 .resizable()
                                 .frame(width: 28, height: 28, alignment: .center)
                                 .foregroundColor(self.model.selectedIndex == index ? Color("light-blue") : Color.white)

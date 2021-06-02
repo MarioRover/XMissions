@@ -7,8 +7,6 @@
 
 import SwiftUI
 
-let defaultImage = UIImage(systemName: "exclamationmark.triangle")!
-
 struct Tab {
     let label: String
     let image: UIImage?
@@ -59,17 +57,3 @@ extension AssetsImages {
     }
 }
 
-
-func currencyFormate(value: Double) -> String {
-    let formatter = NumberFormatter()
-    formatter.locale = Locale.current
-    formatter.usesGroupingSeparator = true
-    formatter.maximumFractionDigits = 0
-    formatter.numberStyle = .currency
-    
-    if let amount = formatter.string(from: value as NSNumber) {
-        return amount
-    } else {
-        return ""
-    }
-}

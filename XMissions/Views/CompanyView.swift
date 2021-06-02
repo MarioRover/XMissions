@@ -66,43 +66,45 @@ struct CompanyView: View {
                         
                         
                         
-                        VStack(alignment: .leading, spacing: 14) {
-                            HeaderSection(title: "Managers")
+                        VStack(spacing: 40) {
+                            VStack(alignment: .leading, spacing: 14) {
+                                ViewTools.HeaderSection(title: "Managers")
 
-                            ForEach(self.companyVM.managers, id:\.id) { manager in
-                                UserItem(manager: manager)
-                            }
-                        }
-                        
-                        VStack {
-                            HeaderSection(title: "Summery")
-
-                            Text(self.company.summary ?? "")
-                                .foregroundColor(Color.white)
-                                .font(.system(size: 14, weight: .light, design: .rounded))
-                                .padding([.leading, .trailing], 16)
-
-                        }
-                        
-                        VStack(alignment: .leading, spacing: 14) {
-                            HeaderSection(title: "Information")
-                            
-                            ForEach(self.companyVM.companyInfo, id:\.label) { info in
-                                InfoItem(info: info)
-                            }
-                            
-                        }
-                        
-                        VStack {
-                            HeaderSection(title: "Social")
-                            
-                            HStack(alignment: .center, spacing: 20) {
-                                ForEach(self.companyVM.companySocial, id:\.label) { data in
-                                    SocialItem(social: data)
+                                ForEach(self.companyVM.managers, id:\.id) { manager in
+                                    UserItem(manager: manager)
                                 }
                             }
                             
-                        }
+                            VStack {
+                                ViewTools.HeaderSection(title: "Summery")
+
+                                Text(self.company.summary ?? "")
+                                    .foregroundColor(Color.white)
+                                    .font(.system(size: 14, weight: .light, design: .rounded))
+                                    .padding([.leading, .trailing], 16)
+
+                            }
+                            
+                            VStack(alignment: .leading, spacing: 14) {
+                                ViewTools.HeaderSection(title: "Information")
+                                
+                                ForEach(self.companyVM.companyInfo, id:\.label) { info in
+                                    InfoItem(info: info)
+                                }
+                                
+                            }
+                            
+                            VStack {
+                                ViewTools.HeaderSection(title: "Social")
+                                
+                                HStack(alignment: .center, spacing: 20) {
+                                    ForEach(self.companyVM.companySocial, id:\.label) { data in
+                                        SocialItem(social: data)
+                                    }
+                                }
+                                
+                            }
+                        }.padding([.leading, .trailing], 15)
                     }
                 }
                 .navigationBarTitle("Comapny")
@@ -118,19 +120,7 @@ struct CompanyView_Previews: PreviewProvider {
     }
 }
 
-struct HeaderSection: View {
-    
-    @State var title: String
-    
-    var body: some View {
-        Text(self.title)
-            .foregroundColor(Color.white)
-            .font(.system(size: 18, weight: .bold, design: .rounded))
-            .padding([.bottom], 14)
-            .padding(.leading, 16)
-            .frame(maxWidth: .infinity, alignment: .leading)
-    }
-}
+
 
 struct UserItem: View {
     
@@ -171,7 +161,7 @@ struct InfoItem: View {
     
     var body: some View {
         HStack {
-            Image(uiImage: info.image ?? defaultImage)
+            Image(uiImage: info.image ?? Tool.defaultImage)
                 .resizable()
                 .frame(width: 30, height: 30, alignment: .center)
                 .foregroundColor(.white)
@@ -200,7 +190,7 @@ struct SocialItem: View {
             Link(destination: url) {
                 VStack {
                     ZStack(alignment: .center) {
-                        Image(uiImage: social.image ?? defaultImage)
+                        Image(uiImage: social.image ?? Tool.defaultImage)
                             .resizable()
                             .frame(width: 25, height: 25, alignment: .center)
                             .foregroundColor(.black)

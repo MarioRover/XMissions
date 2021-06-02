@@ -64,11 +64,24 @@ struct LinkModel: Decodable {
 
 struct RocketModel: Decodable {
     let rocket_name: String?
+    let rocket_type: String?
+    
 }
 
 struct MissionDetail: Decodable {
-    let launch: LaunchModel?
+    let launch: LaunchModel_2?
 }
 
+struct LaunchModel_2: Decodable {
+    let id: String?
+    let launch_date_utc: String?
+    let links: LinkModel?
+    let mission_name: String?
+    let details: String?
+    let is_tentative: Bool?
+    let launch_site: LaunchSiteModel?
+    let launch_success: Bool?
+    let rocket: RocketModel?
+}
 
 

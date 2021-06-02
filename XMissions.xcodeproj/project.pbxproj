@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		830489B726405816005D28C2 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 830489B626405816005D28C2 /* Models.swift */; };
+		830CAF1F2660EAC0000B8191 /* ViewTools.swift in Sources */ = {isa = PBXBuildFile; fileRef = 830CAF1E2660EAC0000B8191 /* ViewTools.swift */; };
+		830CAF212660EB93000B8191 /* Tool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 830CAF202660EB93000B8191 /* Tool.swift */; };
 		8383BB672642AA310029A2C8 /* MissionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8383BB662642AA310029A2C8 /* MissionsView.swift */; };
 		8383BB69264ADA2B0029A2C8 /* Date+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8383BB68264ADA2B0029A2C8 /* Date+Extensions.swift */; };
 		8383BB6B264ADAC80029A2C8 /* ImageLoaderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8383BB6A264ADAC80029A2C8 /* ImageLoaderViewModel.swift */; };
@@ -37,6 +39,8 @@
 
 /* Begin PBXFileReference section */
 		830489B626405816005D28C2 /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
+		830CAF1E2660EAC0000B8191 /* ViewTools.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewTools.swift; sourceTree = "<group>"; };
+		830CAF202660EB93000B8191 /* Tool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tool.swift; sourceTree = "<group>"; };
 		8383BB662642AA310029A2C8 /* MissionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MissionsView.swift; sourceTree = "<group>"; };
 		8383BB68264ADA2B0029A2C8 /* Date+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extensions.swift"; sourceTree = "<group>"; };
 		8383BB6A264ADAC80029A2C8 /* ImageLoaderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLoaderViewModel.swift; sourceTree = "<group>"; };
@@ -77,6 +81,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		830CAF1D2660EAA0000B8191 /* Tools */ = {
+			isa = PBXGroup;
+			children = (
+				830CAF1E2660EAC0000B8191 /* ViewTools.swift */,
+				830CAF202660EB93000B8191 /* Tool.swift */,
+			);
+			path = Tools;
+			sourceTree = "<group>";
+		};
 		83E5ED982632BB3A0027FFDC = {
 			isa = PBXGroup;
 			children = (
@@ -101,6 +114,7 @@
 				83E5EDBE2632BB820027FFDC /* Models */,
 				83E5EDBD2632BB7B0027FFDC /* View Models */,
 				83E5EDBC2632BB6C0027FFDC /* Views */,
+				830CAF1D2660EAA0000B8191 /* Tools */,
 				83E5EDA42632BB3A0027FFDC /* AppDelegate.swift */,
 				83E5EDA62632BB3A0027FFDC /* SceneDelegate.swift */,
 				83E5EDAD2632BB3B0027FFDC /* Assets.xcassets */,
@@ -293,12 +307,14 @@
 				83E5EDA52632BB3A0027FFDC /* AppDelegate.swift in Sources */,
 				83E5EDEA2632C0290027FFDC /* ContentViewModel.swift in Sources */,
 				83E5EDA72632BB3A0027FFDC /* SceneDelegate.swift in Sources */,
+				830CAF212660EB93000B8191 /* Tool.swift in Sources */,
 				83E5EDF22632C1180027FFDC /* CoreDataManager.swift in Sources */,
 				838F5C9D264D055F00EB5E62 /* MissionDetailViewModel.swift in Sources */,
 				83E5EDE42632C0040027FFDC /* CompanyView.swift in Sources */,
 				83E5EDFC2632E9C10027FFDC /* CompanyViewModel.swift in Sources */,
 				83E5EDA92632BB3A0027FFDC /* ContentView.swift in Sources */,
 				83E5EDDD2632BFB60027FFDC /* ResponseModel.swift in Sources */,
+				830CAF1F2660EAC0000B8191 /* ViewTools.swift in Sources */,
 				8383BB69264ADA2B0029A2C8 /* Date+Extensions.swift in Sources */,
 				83E5EDAC2632BB3A0027FFDC /* XMissions.xcdatamodeld in Sources */,
 				83E5EDCF2632BEBB0027FFDC /* Apollo.swift in Sources */,
