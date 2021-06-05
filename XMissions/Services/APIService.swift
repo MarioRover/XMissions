@@ -9,36 +9,42 @@ import Foundation
 
 class APIService {
     
-    static func getInitialData(completion: @escaping (APIResponse?) -> ()) {
+    enum ErrorType {
+        case network
+        case none
+    }
+    
+    static func getInitialData(completion: @escaping (APIResponse?, ErrorType) -> ()) {
         Network.shared.apollo.fetch(query: InitialQuery()) { result in
             switch result {
             case .success(let graphQLResult):
                 if let companyObject = graphQLResult.data?.jsonObject {
 
                     guard let jsonData = try? JSONSerialization.data(withJSONObject: companyObject) else {
-                        completion(nil)
+                        completion(nil, .none)
                         fatalError("Error Seriallize Response")
                     }
                     
                     guard let response = try? JSONDecoder().decode(APIResponse.self, from: jsonData) else {
-                        completion(nil)
+                        completion(nil, .none)
                         fatalError("Error Decode Response")
                     }
                     
-                    completion(response)
+                    completion(response, .none)
                     
                 } else {
                     print("Error in find object")
-                    completion(nil)
+                    completion(nil, .none)
                 }
-            case .failure(let error):
-                print(error)
-                completion(nil)
+            case .failure:
+//                print(error)
+                print("🚫 Request failed")
+                completion(nil, .network)
             }
         }
     }
     
-    static func getMissionDetail(id: String, completion: @escaping (MissionDetail?) -> ()) {
+    static func getMissionDetail(id: String, completion: @escaping (MissionDetail?, ErrorType) -> ()) {
         
         Network.shared.apollo.fetch(query: MissionDetailQuery(id: id)) { result in
             switch result {
@@ -46,25 +52,26 @@ class APIService {
                 if let responseObject = graphQLResult.data?.jsonObject {
                     
                     guard let jsonData = try? JSONSerialization.data(withJSONObject: responseObject) else {
-                        completion(nil)
+                        completion(nil, .none)
                         fatalError("Error Seriallize Response")
                     }
                     
                     guard let response = try? JSONDecoder().decode(MissionDetail.self, from: jsonData) else {
-                        completion(nil)
+                        completion(nil, .none)
                         fatalError("Error Decode Response")
                     }
                     
-                    completion(response)
+                    completion(response, .none)
                     
                 } else {
                     print("Error in find object")
-                    completion(nil)
+                    completion(nil, .none)
                 }
                 
-            case .failure(let error):
-                print(error)
-                completion(nil)
+            case .failure:
+//                print(error)
+                print("🚫 Request failed")
+                completion(nil, .network)
             }
         }
     }

@@ -51,6 +51,7 @@ struct MissionDetailView: View {
             }.onAppear {
                 self.missionDetailVM.getMissionDetail()
             }
+            .toast(isShowing: self.$missionDetailVM.isConnectionIssue, text: Text("Couldn't refresh"))
         
 
     }
@@ -142,8 +143,8 @@ struct InformationView: View {
             }
             
         }
-        .modifier(BlueBox())
-        .redacted(reason: self.missionDetailVM.loading ? .placeholder : [])
+        .blueBox()
+        .redacted(reason: self.missionDetailVM.loading || (self.missionDetailVM.mission == nil) ? .placeholder : [])
     }
 }
 
@@ -209,7 +210,7 @@ struct RocketInfo: View {
                 
                 
             }
-            .modifier(BlueBox())
+            .blueBox()
         }
     }
 }
@@ -241,7 +242,7 @@ struct SiteInfo: View {
                         .font(.system(size: 14, weight: .medium, design: .rounded))
                 }
             }
-            .modifier(BlueBox())
+            .blueBox()
         }
     }
 }
@@ -295,17 +296,4 @@ struct RowData: View {
     }
 }
 
-// MARK: - View Modifiers
-struct BlueBox: ViewModifier {
-    func body(content: Content) -> some View {
-        
-        VStack(alignment: .leading) {
-            content
-                .padding([.top, .bottom], 15)
-                .padding([.leading, .trailing], 20)
-        }
-        .frame(maxWidth: .infinity)
-        .background(Color("mid-blue"))
-        .cornerRadius(5)
-    }
-}
+

@@ -31,13 +31,13 @@ struct ContentView: View {
                 ZStack {
                     switch self.contentVM.selectedIndex {
                     case 0:
-                        Text("Home")
+                        HomeView()
                     case 1:
                         Text("Vehicles")
                     case 2:
                         MissionsView(launchesPast: self.contentVM.launchesPast)
                     case 3:
-                        Text("News")
+                        NewsView()
                     case 4:
                         if let company = self.contentVM.company {
                             CompanyView(companyData: company)
@@ -45,7 +45,9 @@ struct ContentView: View {
                     default:
                         Text("Home")
                     }
-                }.foregroundColor(.blue)
+                }
+                .foregroundColor(.blue)
+                .toast(isShowing: self.$contentVM.isConnectionIssue, text: Text("Couldn't refresh"))
                 
                 Spacer()
                 

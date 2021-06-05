@@ -13,6 +13,8 @@ struct CompanyView: View {
     @State var company: CompanyModel
     @State var currentIndex = 0
     
+    @State private var isShowing = false
+    
     init(companyData: CompanyModel) {
         self.companyVM = CompanyViewModel(company: companyData)
         self.company = companyData
