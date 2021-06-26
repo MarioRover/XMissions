@@ -9,11 +9,12 @@ import SwiftUI
 
 struct MissionsView: View {
     
-    @State var launchesPast: [LaunchModel]
+    let launchesPast: [LaunchModel]
+    let loading: Bool
     
-    init(launchesPast: [LaunchModel]) {
+    init(launchesPast: [LaunchModel], loading: Bool) {
         self.launchesPast = launchesPast
-        
+        self.loading = loading
         UITableView.appearance().backgroundColor = .clear
     }
 
@@ -23,20 +24,27 @@ struct MissionsView: View {
         NavigationView {
             ZStack {
                 Color("navy-blue").edgesIgnoringSafeArea(.all)
-                
+               
                 List {
-                    ForEach(self.launchesPast, id:\.id) { mission in
-                        if let mission = mission {
-                            NavigationLink(destination: MissionDetailView(mission: mission)) {
-                                MissionCell(mission: mission)
-                                    
-                            }.listRowBackground(Color("navy-blue"))
+                    if self.loading {
+                        ForEach(1..<10) { _ in
+                            MissionCell(mission: LaunchModel(id: "", launch_date_utc: "2020-11-21T17:17:00.000Z", links: nil, mission_name: "#################"))
+                                .listRowBackground(Color("navy-blue"))
+                                .redacted(reason: .placeholder)
                         }
-                        
-
+                    } else {
+                        ForEach(self.launchesPast, id:\.id) { mission in
+                            if let mission = mission {
+                                NavigationLink(destination: MissionDetailView(mission: mission)) {
+                                    MissionCell(mission: mission)
+                                    
+                                        
+                                }.listRowBackground(Color("navy-blue"))
+                            }
+                        }
                     }
+
                 }
-                
             }
             
             .navigationBarTitle("Missions")
@@ -47,7 +55,7 @@ struct MissionsView: View {
 
 struct MissionsView_Previews: PreviewProvider {
     static var previews: some View {
-        MissionsView(launchesPast: [LaunchModel]())
+        MissionsView(launchesPast: [LaunchModel](), loading: false)
     }
 }
 

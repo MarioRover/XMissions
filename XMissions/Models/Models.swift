@@ -17,10 +17,7 @@ extension Tab {
     static func tabItems() -> [Tab] {
         
         return [
-            Tab(label: "Home", image: UIImage(named: "globe-americas")),
-            Tab(label: "Vehicles", image: UIImage(named: "rocket")),
             Tab(label: "Missions", image: UIImage(named: "bullseye-arrow")),
-            Tab(label: "News", image: UIImage(named: "satellite-dish")),
             Tab(label: "Company", image: UIImage(named: "industry-alt"))
         ]
     }

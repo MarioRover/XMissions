@@ -19,7 +19,7 @@ struct TabBar: View {
                 ForEach(tabItems.indices) { index in
                     
                     GeometryReader { geometry in
-                        VStack(spacing: 4) {
+                        VStack(alignment: .center) {
                             Image(uiImage: tabItems[index].image ?? Tool.defaultImage)
                                 .resizable()
                                 .frame(width: 28, height: 28, alignment: .center)
@@ -34,8 +34,7 @@ struct TabBar: View {
                             }
                         }
                         .fixedSize(horizontal: false, vertical: true)
-                        .frame(width: geometry.size.width / 2, height: 44, alignment: .center)
-                        .padding(.horizontal)
+                        .frame(width: geometry.size.width, height: 44, alignment: .center)
                         
                     }.frame(height: 44, alignment: .center)
 

@@ -31,14 +31,8 @@ struct ContentView: View {
                 ZStack {
                     switch self.contentVM.selectedIndex {
                     case 0:
-                        HomeView()
+                        MissionsView(launchesPast: self.contentVM.launchesPast, loading: self.contentVM.loading)
                     case 1:
-                        Text("Vehicles")
-                    case 2:
-                        MissionsView(launchesPast: self.contentVM.launchesPast)
-                    case 3:
-                        NewsView()
-                    case 4:
                         if let company = self.contentVM.company {
                             CompanyView(companyData: company)
                         }

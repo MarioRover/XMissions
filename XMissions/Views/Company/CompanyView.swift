@@ -10,10 +10,9 @@ import SwiftUI
 struct CompanyView: View {
     
     @ObservedObject private var companyVM: CompanyViewModel
-    @State var company: CompanyModel
     @State var currentIndex = 0
-    
     @State private var isShowing = false
+    var company: CompanyModel
     
     init(companyData: CompanyModel) {
         self.companyVM = CompanyViewModel(company: companyData)
